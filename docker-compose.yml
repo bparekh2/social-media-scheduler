@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  user-service:
+    build: ./user-service
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./user-service:/app
+    env_file:
+      - ./user-service/.env
+
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: schedulerdb
